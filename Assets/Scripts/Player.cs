@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private List<GameObject> clones = new List<GameObject>();
     private int maxClones = 2;
 
+    // Add a variable to keep track of the score
+    private int score = 0;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,6 +34,9 @@ public class PlayerController : MonoBehaviour
                 CreateClone();
             }
         }
+
+        // Display score in the console for testing (optional)
+        Debug.Log("Score: " + score);
     }
 
     // Move the player using "A" and "D" keys
@@ -82,5 +88,12 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    // Method to increase score when a coin is collected
+    public void IncreaseScore(int amount)
+    {
+        score += amount; // Increment score
+        Debug.Log("Score: " + score); // Optional: Display updated score
     }
 }

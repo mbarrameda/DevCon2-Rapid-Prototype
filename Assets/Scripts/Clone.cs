@@ -54,4 +54,20 @@ public class CloneController : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    // Method to detect coin collection
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Coin")) // Check if the collided object is a coin
+        {
+            PlayerController playerController = FindObjectOfType<PlayerController>(); // Find the PlayerController instance
+            if (playerController != null)
+            {
+                playerController.IncreaseScore(1); // Increase the score in PlayerController
+            }
+
+            // Destroy the coin GameObject
+            Destroy(other.gameObject);
+        }
+    }
 }

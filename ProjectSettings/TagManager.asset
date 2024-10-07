@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Clone
+  - Coin
   layers:
   - Default
   - TransparentFX
