@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private List<GameObject> clones = new List<GameObject>();
     private int maxClones = 2;
-    private float moveInput;
 
     void Start()
     {
@@ -34,15 +33,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Move the player using "A" and "D" keys
     void Move()
     {
-        moveInput = Input.GetAxis("Horizontal");
+        float moveInput = 0;
+        if (Input.GetKey(KeyCode.A)) moveInput = -1;
+        if (Input.GetKey(KeyCode.D)) moveInput = 1;
+
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
     }
 
+    // Jump with the spacebar
     void Jump()
     {
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
@@ -51,25 +55,8 @@ public class PlayerController : MonoBehaviour
     void CreateClone()
     {
         // Determine the direction to spawn the clone
-        Vector3 spawnPosition = transform.position;
-
-        if (moveInput > 0) // Player is moving to the right
-        {
-            spawnPosition += new Vector3(cloneSpawnOffset, 0, 0);
-        }
-        else if (moveInput < 0) // Player is moving to the left
-        {
-            spawnPosition -= new Vector3(cloneSpawnOffset, 0, 0);
-        }
-        else // If player is not moving, spawn directly above
-        {
-            spawnPosition += new Vector3(0, cloneSpawnOffset, 0);
-        }
-
-        // Create clone and set it to mimic the player's behavior
+        Vector3 spawnPosition = transform.position + new Vector3(cloneSpawnOffset, 0, 0);
         GameObject clone = Instantiate(clonePrefab, spawnPosition, Quaternion.identity);
-        CloneController cloneController = clone.GetComponent<CloneController>();
-        cloneController.SetPlayerReference(this.gameObject); // Pass player reference to the clone
         clones.Add(clone);
         StartCoroutine(DestroyCloneAfterTime(clone, 20f));  // Destroy clone after 20 seconds
     }
@@ -95,15 +82,5 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
-    }
-
-    public bool IsGrounded()
-    {
-        return isGrounded;
-    }
-
-    public float GetMoveInput()
-    {
-        return moveInput;
     }
 }

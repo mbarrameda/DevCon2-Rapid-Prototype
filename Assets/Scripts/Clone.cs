@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class CloneController : MonoBehaviour
 {
-    private GameObject player;
-    private Rigidbody2D rb;
-    private PlayerController playerController;
-
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
-
+    private Rigidbody2D rb;
     private bool isGrounded = false;
 
     void Start()
@@ -20,24 +16,27 @@ public class CloneController : MonoBehaviour
 
     void Update()
     {
-        if (player != null)
-        {
-            // Mimic the player's movement input
-            float moveInput = playerController.GetMoveInput();
-            rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
-
-            // Mimic jumping based on player input
-            if (playerController.IsGrounded() && Input.GetButtonDown("Jump"))
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            }
-        }
+        Move();
+        Jump();
     }
 
-    public void SetPlayerReference(GameObject playerReference)
+    // Move the clone with the arrow keys
+    void Move()
     {
-        player = playerReference;
-        playerController = player.GetComponent<PlayerController>();
+        float moveInput = 0;
+        if (Input.GetKey(KeyCode.LeftArrow)) moveInput = -1;
+        if (Input.GetKey(KeyCode.RightArrow)) moveInput = 1;
+
+        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+    }
+
+    // Jump with the up arrow
+    void Jump()
+    {
+        if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
