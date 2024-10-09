@@ -26,6 +26,16 @@ This prototype focuses on creating a 2D platformer that solves puzzles using the
 How does giving players control over a clone in a 2D platformer impact their ability to solve complex puzzles and interact with their environment?
 
 ## Design Rationale
-We want the players to have freedom by creavitely using their character and clone. Through this, the player will feel a sense of accomplishment when they solve the puzzles. We also want the players to ofeel challenged but rewarded. As the players solve more challenging puzzles, they will also feel a sense of accomplishment as they master the clone mechanic. We also want the player to feel as if the game was a collaborative effort between two players. Even though the player is in control of both the character and the clone, it will feel like a collaborative effort when it comes to problem-solving.
+We want the players to have freedom by creatively using their character and clone. Through this, the player will feel a sense of accomplishment when they solve the puzzles. We also want the players to ofeel challenged but rewarded. As the players solve more challenging puzzles, they will also feel a sense of accomplishment as they master the clone mechanic. We also want the player to feel as if the game was a collaborative effort between two players. Even though the player is in control of both the character and the clone, it will feel like a collaborative effort when it comes to problem-solving.
 
 We feel as if the clone mechanic is innovative as it adds a new twist to the traditional platformer by making the players think about the timing and positioning of the clone. The whole premise of this mechanic doesn't just focus on the movement, but also on managing two entities to solve puzzles, which introduces a deeper layer of strategy to the gameplay.
+
+## Gameplay Controls
+"A" and "D" to move the player
+"Space" to jump
+"E" to create clones 
+"Arrow Keys" to move the clone
+
+## Citation
+https://stackoverflow.com/search?q=player+CLone+in+2d+Unity
+*stack overflow was used to help with the solution to the code, not the direct code itself but we took the idea from it.
